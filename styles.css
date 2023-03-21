@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+#wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #DCDCDC;
+}
+#header {
+  position: absolute;
+  z-index: 2;
+}
+#main {
+  width: 100%;
+  height: 100%;
+}
+.anote {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  border-radius: 5px;
+}
+.anote-header {
+  height: 10%;
+  /* border: 1px solid black; */
+}
+.anote-content {
+  height: 90%;
+  /* border: 1px solid blue; */
+  padding: 5px 20px;
+}

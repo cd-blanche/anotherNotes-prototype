@@ -24,21 +24,29 @@
   top: 0;
   left: 0;
   width: 400px;
-  min-height: 400px;
   background-color: white;
   border-radius: 10px;
+  box-shadow: 1px 3px 10px 1px hsl(0, 0%, 16%, 0.2);
+}
+.anote-header {
+  /* border: 1px solid black; */
+  height: 20px;
+  background-color: #282828;
+  border-radius: 10px 10px 0 0;
 }
 .anote-content {
-  min-height: 400px;
+  min-height: 380px;
   padding: 20px 30px;
-  /* border: 1px solid black; */
+  /* border: 1px solid red; */
 }
 .anote-title:focus,
 .anote-body:focus {
   outline: none;
 }
-.anote-title,
 .anote-body {
-  /* border: 1px solid red; */
-  margin: 10px 0;
+  /* border: 1px solid blue; */
+}
+.anote-title {
+  /* border: 1px solid blue; */
+  margin-bottom: 10px;
 }

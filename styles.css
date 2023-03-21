@@ -24,16 +24,21 @@
   top: 0;
   left: 0;
   width: 400px;
-  height: 400px;
+  min-height: 400px;
   background-color: white;
-  border-radius: 5px;
-}
-.anote-header {
-  height: 10%;
-  /* border: 1px solid black; */
+  border-radius: 10px;
 }
 .anote-content {
-  height: 90%;
-  /* border: 1px solid blue; */
-  padding: 5px 20px;
+  min-height: 400px;
+  padding: 20px 30px;
+  /* border: 1px solid black; */
+}
+.anote-title:focus,
+.anote-body:focus {
+  outline: none;
+}
+.anote-title,
+.anote-body {
+  /* border: 1px solid red; */
+  margin: 10px 0;
 }

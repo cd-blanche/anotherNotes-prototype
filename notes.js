@@ -6,8 +6,11 @@ class Note {
     this.body = body,
     this.positionX = positionX,
     this.positionY = positionY
-    this.deleteNote = () => {
+    this.deleteNote = function() {
       // create delete note function here
+      console.log(this);
+      this.remove();
+      // debug -> currently only deletes recently added note
     };
   };
 
@@ -56,6 +59,10 @@ function createNote() {
   </div>
   `
   targetBody.innerHTML += appendNote;
+  
+  // Add event listeners to new note
+  const deleteBtn = document.querySelector(`#anote-${note.id}`);
+  deleteBtn.addEventListener('click', note.deleteNote)
 
 };
 

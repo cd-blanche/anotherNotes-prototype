@@ -4,6 +4,7 @@
   margin: 0;
 }
 #wrapper {
+  padding: 20px;
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -14,6 +15,14 @@
   position: absolute;
   z-index: 2;
 }
+#new-anote {
+  width: 50px;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 1px 3px 10px 1px hsl(0, 0%, 16%, 0.2);
+  
+}
 #main {
   position: relative;
   width: 100%;
@@ -21,8 +30,8 @@
 }
 .anote {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50px;
+  left: 50px;
   width: 400px;
   background-color: white;
   border-radius: 10px;

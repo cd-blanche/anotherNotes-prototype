@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>anotherNotes - Prototype</title>
   <link rel="stylesheet" href="styles.css">
-  <script defer src="main.js"></script>
+  <!-- <script defer src="main.js"></script> -->
+  <script defer src="notes.js"></script>
 </head>
 <body>
   <div id="wrapper">
-    <header id="header"></header>
+    <header id="header">
+    </header>
 
     <main id="main">
 
@@ -18,15 +20,8 @@
       <div class="anote">
         <div class="anote-header"></div>
         <div class="anote-content">
-          <h2 class="anote-title" contenteditable="true">Sample note</h2>
-          <div class="anote-body" contenteditable="true">
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-              Laboriosam distinctio eum dolorem optio atque possimus ab deleniti delectus,
-              aliquid porro deserunt voluptatem vitae assumenda repellendus tenetur, earum
-              dolorum repellat saepe fugit enim, mollitia tempora! Harum tempora nisi assumenda
-              officia sequi suscipit nostrum labore minus! Rem veniam molestias amet eaque iste!
-            </p>
-          </div>
+          <input type="text" class="anote-title">
+          <textarea name="" class="anote-body" cols="30" rows="10"></textarea>
         </div>
       </div>
 

@@ -15,13 +15,13 @@
   position: absolute;
   z-index: 2;
 }
-#new-anote {
+#add-note {
   width: 50px;
   aspect-ratio: 1;
   border: none;
   border-radius: 50%;
   box-shadow: 1px 3px 10px 1px hsl(0, 0%, 16%, 0.2);
-  
+  cursor: pointer;
 }
 #main {
   position: relative;

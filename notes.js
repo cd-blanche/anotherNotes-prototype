@@ -10,18 +10,45 @@ class Note {
 
 };
 
+// localStorage structure
+/*
+  "notes": {
+    [
+      {
+        "id"
+        "title"
+        "body"
+        "positionX"
+        "positionY"
+      }
+    ]
+  }
+*/
+
 
 function createNote() {
   const targetBody = document.querySelector('#main');
   const note = new Note();
-  console.log(note);
 
+  // Set or update localStorage of notes
+  if (!localStorage.notes) {
+    localStorage.setItem('notes', JSON.stringify([note]));
+    console.log(localStorage)
+  } else {
+    const currentNotes = JSON.parse(localStorage.getItem('notes'));
+    console.log(currentNotes)
+    currentNotes.push(note);
+    console.log(localStorage)
+    localStorage.setItem('notes', JSON.stringify(currentNotes));
+  };
+
+  // Add new note to HTML body
   const appendNote = `
   <div class="anote" id="anote-${note.id}">
     <div class="anote-header"></div>
     <div class="anote-content">
-      <input type="text" class="anote-title" value="${note.title}">
-      <textarea class="anote-body" cols="30" rows="10">${note.body}</textarea>
+      <input type="text" class="anote-title" value="Sample Title">
+      <textarea class="anote-body" cols="30" rows="10">Sample Body</textarea>
     </div>
   </div>
   `
@@ -29,5 +56,16 @@ function createNote() {
 
 };
 
-const addNote = document.querySelector('#add-note');
-addNote.addEventListener('click', createNote)
+function noteStartup() {
+  // let noteCounter = 0;
+  // const allNotes = document.querySelectorAll('.anote');
+  // noteCounter = allNotes.length;
+  // console.log(noteCounter);
+
+  const addNoteBtn = document.querySelector('#add-note');
+  addNoteBtn.addEventListener('click', createNote);
+
+
+};
+localStorage.clear();
+noteStartup();

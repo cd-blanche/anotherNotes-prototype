@@ -39,9 +39,22 @@
 }
 .anote-header {
   /* border: 1px solid black; */
-  height: 20px;
+  padding: 5px 5px;
   background-color: #282828;
   border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+  /* justify-content: flex-end ; */
+}
+.anote-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
 .anote-content {
   min-height: 380px;

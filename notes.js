@@ -6,6 +6,9 @@ class Note {
     this.body = body,
     this.positionX = positionX,
     this.positionY = positionY
+    this.deleteNote = () => {
+      // create delete note function here
+    };
   };
 
 };
@@ -26,6 +29,7 @@ class Note {
 */
 
 
+
 function createNote() {
   const targetBody = document.querySelector('#main');
   const note = new Note();
@@ -33,19 +37,18 @@ function createNote() {
   // Set or update localStorage of notes
   if (!localStorage.notes) {
     localStorage.setItem('notes', JSON.stringify([note]));
-    console.log(localStorage)
   } else {
     const currentNotes = JSON.parse(localStorage.getItem('notes'));
-    console.log(currentNotes)
     currentNotes.push(note);
-    console.log(localStorage)
     localStorage.setItem('notes', JSON.stringify(currentNotes));
   };
 
-  // Add new note to HTML body
+  // Append new note to HTML body
   const appendNote = `
   <div class="anote" id="anote-${note.id}">
-    <div class="anote-header"></div>
+    <div class="anote-header">
+      <button type="button" class="anote-delete" data-action="delete">&times;</button>
+    </div>
     <div class="anote-content">
       <input type="text" class="anote-title" value="Sample Title">
       <textarea class="anote-body" cols="30" rows="10">Sample Body</textarea>
@@ -55,6 +58,10 @@ function createNote() {
   targetBody.innerHTML += appendNote;
 
 };
+
+function deleteNote(note) {
+
+}
 
 function noteStartup() {
   // let noteCounter = 0;

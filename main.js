@@ -2,35 +2,33 @@ function load() {
   const notes = document.querySelectorAll('.anote');
   const noteBody = document.querySelectorAll('.anote-body');
   const noteTitle = document.querySelectorAll('.anote-title');
-  const position = JSON.parse(localStorage.note_position);
+  const position = (localStorage.notePosition) ? JSON.parse(localStorage.notePosition) : {};
 
   
 
   notes.forEach(note => {
+    let notePosX = position.previousX || 20;
+    let notePosY = position.previousY || 20;
+
     note.addEventListener('input', saveNote);
-    
     note.addEventListener('mousedown', dragNote)
     // code to fetch and set position of previously saved notes
-    // -------------------------
-    note.style.top = `${position.notePosY}px`
-    note.style.left = `${position.notePosX}px`
-    // -------------------------
-    // code to save note title and body 
+    note.style.top = `${notePosY}px`
+    note.style.left = `${notePosX}px`
+    // code to fetch and set title and body of previously saved notes
+    // ...
   });
 
   noteBody.forEach((body, index) => {
-    body.textContent = 'Sample Body';
+    // body.textContent = 'Sample Body';
   });
   noteTitle.forEach((title, index) => {
-    title.textContent = 'Sample Title'
+    // title.textContent = 'Sample Title'
   });
 
 };
 // function to drag note
 function dragNote(e) {
-  let notePosX;
-  let notePosY;
-
   document.onmousemove = (event) => {
     notePosX = event.x - e.layerX;
     notePosY = event.y - e.layerY;
@@ -40,12 +38,13 @@ function dragNote(e) {
   document.onmouseup = () => {
     // save position to localStorage
     // -------------------------
-    localStorage.setItem('note_position', JSON.stringify(
+    localStorage.setItem('notePosition', JSON.stringify(
       {
-        'notePosX': notePosX,
-        'notePosY': notePosY,
+        'previousX': notePosX,
+        'previousY': notePosY,
       }
     ));
+    console.log(notePosX, notePosY)
     // -------------------------
     document.onmousemove = null;
     document.onmouseup = null;
@@ -59,7 +58,7 @@ function saveNote(e) {
 
 load();
 
-console.log(localStorage)
+console.log(localStorage.notePosition)
 
 /*
   anote Object

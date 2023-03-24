@@ -6,12 +6,6 @@ class Note {
     this.body = body,
     this.positionX = positionX,
     this.positionY = positionY
-    this.deleteNote = function() {
-      // create delete note function here
-      console.log(this);
-      this.remove();
-      // debug -> currently only deletes recently added note
-    };
   };
 
 };
@@ -59,25 +53,35 @@ function createNote() {
   </div>
   `
   targetBody.innerHTML += appendNote;
-  
-  // Add event listeners to new note
-  const deleteBtn = document.querySelector(`#anote-${note.id}`);
-  deleteBtn.addEventListener('click', note.deleteNote)
-
+  updateNotes();
 };
 
-function deleteNote(note) {
-
+function deleteNote(e) {
+  // console.log()
+  const note = this.closest('.anote');
+  const noteId = note.id;
+  console.log(noteId)
+  note.remove();
+  // remove() this item from the DOM
+  // also remove from localStorage
 }
 
+function updateNotes() {
+  const allNotes = document.querySelectorAll('.anote');
+  allNotes.forEach(note => {
+    const deleteBtn = note.querySelector('.anote-delete');
+    deleteBtn.addEventListener('click', deleteNote);
+  });
+};
+
+
 function noteStartup() {
-  // let noteCounter = 0;
-  // const allNotes = document.querySelectorAll('.anote');
-  // noteCounter = allNotes.length;
-  // console.log(noteCounter);
 
   const addNoteBtn = document.querySelector('#add-note');
   addNoteBtn.addEventListener('click', createNote);
+
+  // Updates notes
+  updateNotes();
 
 
 };

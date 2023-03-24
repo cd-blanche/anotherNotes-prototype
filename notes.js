@@ -25,9 +25,25 @@ class Note {
   }
 */
 
+const deleteNote = function deleteThisNote(e) {
+  // console.log()
+  const note = this.closest('.anote');
+  const noteId = note.id;
+  console.log(noteId)
+  note.remove();
+  // remove() this item from the DOM
+  // also remove from localStorage
+};
 
+const updateNotes = function screenAllNotesAndUpdate() {
+  const allNotes = document.querySelectorAll('.anote');
+  allNotes.forEach(note => {
+    const deleteBtn = note.querySelector('.anote-delete');
+    deleteBtn.addEventListener('click', deleteNote);
+  });
+};
 
-function createNote() {
+const createNote = function createNewNote() {
   const targetBody = document.querySelector('#main');
   const note = new Note();
 
@@ -56,34 +72,11 @@ function createNote() {
   updateNotes();
 };
 
-function deleteNote(e) {
-  // console.log()
-  const note = this.closest('.anote');
-  const noteId = note.id;
-  console.log(noteId)
-  note.remove();
-  // remove() this item from the DOM
-  // also remove from localStorage
-}
-
-function updateNotes() {
-  const allNotes = document.querySelectorAll('.anote');
-  allNotes.forEach(note => {
-    const deleteBtn = note.querySelector('.anote-delete');
-    deleteBtn.addEventListener('click', deleteNote);
-  });
-};
-
-
-function noteStartup() {
-
+// Immediately invoked function expression (IIFE)
+(function() {
   const addNoteBtn = document.querySelector('#add-note');
   addNoteBtn.addEventListener('click', createNote);
-
   // Updates notes
   updateNotes();
-
-
-};
+})();
 localStorage.clear();
-noteStartup();

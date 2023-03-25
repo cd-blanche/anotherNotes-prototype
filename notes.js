@@ -45,7 +45,7 @@ const updateNotes = function screenAllNotesAndUpdate() {
 };
 
 const createNote = function createNewNote() {
-  const targetBody = document.querySelector('#main');
+  const noteContainer = document.querySelector('#main');
   const note = new Note();
 
   // Set or update localStorage of notes
@@ -69,15 +69,36 @@ const createNote = function createNewNote() {
     </div>
   </div>
   `
-  targetBody.innerHTML += appendNote;
+  noteContainer.innerHTML += appendNote;
   updateNotes();
 };
 
 // Immediately invoked function expression (IIFE)
+// Load notes
 (function() {
+  const noteContainer = document.querySelector('#main');
   const addNoteBtn = document.querySelector('#add-note');
   addNoteBtn.addEventListener('click', createNote);
+
+  // Load localStorage notes
+  const currentNotes = JSON.parse(localStorage.getItem('notes'));
+
+  Array.from(currentNotes).forEach(note => {
+    noteContainer.innerHTML += `
+    <div class="anote" id="anote-${note.id}">
+      <div class="anote-header">
+        <button type="button" class="anote-delete" data-action="delete">&times;</button>
+      </div>
+      <div class="anote-content">
+        <input type="text" class="anote-title" value="${note.title}">
+        <textarea class="anote-body" cols="30" rows="10">${note.body}</textarea>
+      </div>
+    </div>
+    `
+  });
+
   // Updates notes
   updateNotes();
 })();
-localStorage.clear();
+
+// localStorage.clear();

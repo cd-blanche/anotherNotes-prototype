@@ -44,6 +44,10 @@ const updateNotes = function screenAllNotesAndUpdate() {
   });
 };
 
+const saveNotes = function saveNoteOnTitleBodyChange() {
+  document.addEventListener('input',)
+};
+
 const createNote = function createNewNote() {
   const noteContainer = document.querySelector('#main');
   const note = new Note();
@@ -99,6 +103,6 @@ const createNote = function createNewNote() {
 
   // Updates notes
   updateNotes();
-})();
+}());
 
 // localStorage.clear();

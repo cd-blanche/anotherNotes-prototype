@@ -26,13 +26,14 @@ class Note {
 */
 
 const deleteNote = function deleteThisNote(e) {
-  // console.log()
   const note = this.closest('.anote');
-  const noteId = note.id;
-  console.log(noteId)
+  const noteId = note.id.split('-')[1];
+
   note.remove();
-  // remove() this item from the DOM
-  // also remove from localStorage
+
+  const currentNotes = JSON.parse(localStorage.getItem('notes'));
+  const newNotes = currentNotes.filter(obj => obj.id != noteId);
+  localStorage.setItem('notes', JSON.stringify(newNotes));
 };
 
 const updateNotes = function screenAllNotesAndUpdate() {

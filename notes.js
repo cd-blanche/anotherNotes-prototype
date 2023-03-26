@@ -28,26 +28,33 @@ class Note {
 const deleteNote = function deleteThisNote(e) {
   const note = this.closest('.anote');
   const noteId = note.id.split('-')[1];
-
+  const storedNotes = JSON.parse(localStorage.getItem('notes'));
+  const updatedNotes = storedNotes.filter(obj => obj.id != noteId);
   note.remove();
-
-  const currentNotes = JSON.parse(localStorage.getItem('notes'));
-  const newNotes = currentNotes.filter(obj => obj.id != noteId);
-  localStorage.setItem('notes', JSON.stringify(newNotes));
+  localStorage.setItem('notes', JSON.stringify(updatedNotes));
 };
-
+const saveNote = function saveNoteOnTitleBodyChange(e) {
+  const noteId = parseInt(this.id.split('-')[1]);
+  const storedNotes = JSON.parse(localStorage.getItem('notes'));
+  const updatedNotes = storedNotes.map((note) => {
+    if (note.id === noteId) {
+      note.title = this.querySelector('.anote-title').value;
+      note.body = this.querySelector('.anote-body').value;;
+      return note;
+    } else {
+      return note;
+    };
+  });
+  localStorage.setItem('notes', JSON.stringify(updatedNotes))
+};
 const updateNotes = function screenAllNotesAndUpdate() {
   const allNotes = document.querySelectorAll('.anote');
   allNotes.forEach(note => {
     const deleteBtn = note.querySelector('.anote-delete');
     deleteBtn.addEventListener('click', deleteNote);
+    note.addEventListener('input', saveNote);
   });
 };
-
-const saveNotes = function saveNoteOnTitleBodyChange() {
-  document.addEventListener('input',)
-};
-
 const createNote = function createNewNote() {
   const noteContainer = document.querySelector('#main');
   const note = new Note();
@@ -56,9 +63,9 @@ const createNote = function createNewNote() {
   if (!localStorage.notes) {
     localStorage.setItem('notes', JSON.stringify([note]));
   } else {
-    const currentNotes = JSON.parse(localStorage.getItem('notes'));
-    currentNotes.push(note);
-    localStorage.setItem('notes', JSON.stringify(currentNotes));
+    const storedNotes = JSON.parse(localStorage.getItem('notes'));
+    storedNotes.push(note);
+    localStorage.setItem('notes', JSON.stringify(storedNotes));
   };
 
   // Append new note to HTML body
@@ -69,7 +76,7 @@ const createNote = function createNewNote() {
     </div>
     <div class="anote-content">
       <input type="text" class="anote-title" value="Sample Title">
-      <textarea class="anote-body" cols="30" rows="10">Sample Body</textarea>
+      <textarea class="anote-body" cols="30" rows="10" value="" placeholder="Sample Body"></textarea>
     </div>
   </div>
   `
@@ -85,9 +92,9 @@ const createNote = function createNewNote() {
   addNoteBtn.addEventListener('click', createNote);
 
   // Load localStorage notes
-  const currentNotes = JSON.parse(localStorage.getItem('notes'));
+  const storedNotes = JSON.parse(localStorage.getItem('notes'));
 
-  Array.from(currentNotes).forEach(note => {
+  Array.from(storedNotes).forEach(note => {
     noteContainer.innerHTML += `
     <div class="anote" id="anote-${note.id}">
       <div class="anote-header">
@@ -95,7 +102,7 @@ const createNote = function createNewNote() {
       </div>
       <div class="anote-content">
         <input type="text" class="anote-title" value="${note.title}">
-        <textarea class="anote-body" cols="30" rows="10">${note.body}</textarea>
+        <textarea class="anote-body" cols="30" rows="10" value="${note.body}" placeholder="Sample Body">${note.body}</textarea>
       </div>
     </div>
     `

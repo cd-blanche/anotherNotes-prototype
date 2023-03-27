@@ -70,11 +70,13 @@ const createNote = function createNewNote() {
     const storedNotes = JSON.parse(localStorage.getItem("notes"));
     storedNotes.push(note);
     localStorage.setItem("notes", JSON.stringify(storedNotes));
-  }
+  };
 
   // Append new note to HTML body
-  const appendNote = `
-  <div class="anote" id="anote-${note.id}">
+  const appendNote = document.createElement('div');
+  appendNote.id = `anote-${note.id}`
+  appendNote.classList.add('anote');
+  appendNote.innerHTML = `
     <div class="anote-header">
       <button type="button" class="anote-delete" data-action="delete">&times;</button>
     </div>
@@ -82,9 +84,8 @@ const createNote = function createNewNote() {
       <input type="text" class="anote-title" value="Sample Title">
       <textarea class="anote-body" cols="30" rows="10" value="" placeholder="Sample Body"></textarea>
     </div>
-  </div>
   `;
-  noteContainer.innerHTML += appendNote;
+  noteContainer.appendChild(appendNote);
   updateNotes();
 };
 

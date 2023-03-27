@@ -2,7 +2,7 @@ class Note {
   constructor(
     id = Math.floor(Math.random() * 10000) + 1,
     title = "Sample Title",
-    body = "Sample Body",
+    body = "Enter body here",
     positionX = 20,
     positionY = 10
   ) {
@@ -43,7 +43,7 @@ const saveNote = function saveNoteOnTitleBodyChange(e) {
   const updatedNotes = storedNotes.map((note) => {
     if (note.id === noteId) {
       note.title = this.querySelector(".anote-title").value;
-      note.body = this.querySelector(".anote-body").value;
+      note.body = this.querySelector(".anote-body").textContent;
       return note;
     } else {
       return note;
@@ -81,8 +81,8 @@ const createNote = function createNewNote() {
       <button type="button" class="anote-delete" data-action="delete">&times;</button>
     </div>
     <div class="anote-content">
-      <input type="text" class="anote-title" value="Sample Title">
-      <textarea class="anote-body" cols="30" rows="10" value="" placeholder="Sample Body"></textarea>
+      <input type="text" class="anote-title" value="${note.title}">
+      <div class="anote-body" contenteditable="true">${note.body}</div>
     </div>
   `;
   noteContainer.appendChild(appendNote);
@@ -107,7 +107,7 @@ const createNote = function createNewNote() {
       </div>
       <div class="anote-content">
         <input type="text" class="anote-title" value="${note.title}">
-        <textarea class="anote-body" cols="30" rows="10" value="${note.body}" placeholder="Sample Body">${note.body}</textarea>
+        <div class="anote-body" contenteditable="true">${note.body}</div>
       </div>
     </div>
     `;

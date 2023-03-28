@@ -66,9 +66,10 @@
 }
 .anote-content {
   flex: 1;
-  padding: 20px 30px;
+  padding: 20px 30px 60px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .anote-title:focus,
 .anote-body:focus {
@@ -83,4 +84,15 @@
 .anote-body {
   flex: 1 1 auto;
   font-size: 0.9rem;
+}
+.anote-saving {
+  position: absolute;
+  bottom: 0;
+  padding: 0px 20px 15px;
+  /* border: 1px solid black; */
+  right: 0;
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.5s;
 }

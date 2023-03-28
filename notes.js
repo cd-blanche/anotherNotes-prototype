@@ -38,25 +38,42 @@ const deleteNote = function deleteThisNote(e) {
   localStorage.setItem("notes", JSON.stringify(updatedNotes));
 };
 const saveNote = function saveNoteOnTitleBodyChange(e) {
-  const noteId = parseInt(this.id.split("-")[1]);
+  const targetNote = e.target;
+  const parentNote = targetNote.closest('.anote');
+  const noteBody = parentNote.querySelector('.anote-body');
+  const noteTitle = parentNote.querySelector('.anote-title');
+  const savingText = targetNote.nextElementSibling;
+  const noteId = parseInt(parentNote.id.split("-")[1]);
   const storedNotes = JSON.parse(localStorage.getItem("notes"));
   const updatedNotes = storedNotes.map((note) => {
     if (note.id === noteId) {
-      note.title = this.querySelector(".anote-title").value;
-      note.body = this.querySelector(".anote-body").textContent;
+      console.log(targetNote.value)
+      note.title = noteTitle.value;
+      note.body = noteBody.textContent;
       return note;
     } else {
       return note;
     }
   });
   localStorage.setItem("notes", JSON.stringify(updatedNotes));
+  savingText.style.opacity = 1;
+  setTimeout(() => {
+    savingText.style.opacity = 0;
+  }, 1500);
 };
 const updateNotes = function screenAllNotesAndUpdate() {
   const allNotes = document.querySelectorAll(".anote");
   allNotes.forEach((note) => {
     const deleteBtn = note.querySelector(".anote-delete");
+    let timer;
     deleteBtn.addEventListener("click", deleteNote);
-    note.addEventListener("input", saveNote);
+    note.addEventListener("input", () => {
+      clearTimeout(timer);
+    });
+    note.addEventListener('keyup', (e) => {
+      clearTimeout(timer);
+      timer = setTimeout(saveNote, 1000, e);
+    });
   });
 };
 const createNote = function createNewNote() {
@@ -83,6 +100,7 @@ const createNote = function createNewNote() {
     <div class="anote-content">
       <input type="text" class="anote-title" value="${note.title}">
       <div class="anote-body" contenteditable="true">${note.body}</div>
+      <span class="anote-saving">Saving...</span>
     </div>
   `;
   noteContainer.appendChild(appendNote);
@@ -108,6 +126,7 @@ const createNote = function createNewNote() {
       <div class="anote-content">
         <input type="text" class="anote-title" value="${note.title}">
         <div class="anote-body" contenteditable="true">${note.body}</div>
+        <span class="anote-saving">Saving...</span>
       </div>
     </div>
     `;
